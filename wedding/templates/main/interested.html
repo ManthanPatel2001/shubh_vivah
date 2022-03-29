@@ -1,0 +1,48 @@
+{%extends 'main/header.html'%}
+{%load static%}
+{%block user_body%}
+<!-- load search static File -->
+<link rel="stylesheet" href="{%static 'main/search.css'%}">
+
+<!-- if statement for search results  -->
+<main class="main-container">
+    {% if interest %}
+        <div class="search">
+            {% for intrest in interest %}
+            <div class="search-result d-inline-block">
+                <div class="images-profile">
+                    {% if intrest.img %}
+                        <img src="../../media/{{intrest.img}}" alt="{{intrest.img.url}}promotional-set">
+                    {% else %}
+                        <img src="../../media/profileImg/default_profile.png" alt="promotional">
+                    {% endif %}
+                </div>
+                <h3>{{intrest.fname}} {{intrest.lname}}</h3>
+                <div class="details">
+                    <span>{{ intrest.age }}</span> |
+                    <span>{{intrest.religene}}</span> | 
+                    <span>{{ intrest.profession}}</span> | <br/>
+                    <span>{{ intrest.city }}, {{ intrest.state }}</span>
+                </div>
+                <div class=" button-profile d-flex justify-content-evenly">
+                    <form action="{% url 'searchDetail'%}" style="width:40%;" method="GET">
+                        <input type="hidden" name="relation" id="hidden_data" value="interested">
+                        <button type="submit" name="view" value="{{ intrest.id }}" class="view">View</button>
+                    </form>
+                    <form action="{% url 'notintrest' %}" style="width:45%;" method="POST">
+                        {% csrf_token %}
+                        <button type="submit"  name="notintrest" value="{{ intrest.id }}"  class="interst" >Not Interested</button>
+                    </form>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+        <!-- Interested div -->
+        {%else%}
+        <h3 style="padding-top: 10rem; "><center>{{emptyMsg}}</center></h3>
+    {% endif %}
+</main>
+{% endblock %}
+</body>
+</html>
+

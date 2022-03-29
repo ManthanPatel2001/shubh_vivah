@@ -1,0 +1,130 @@
+.regi-container{
+    width: 60%;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    margin-top: 5%;
+    background-color: #fcfcfc;
+}
+.regi-img{
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
+}
+.regi-right h1{
+    width: 70%;
+    font-weight: 900;
+    color: #463C74;
+    font-size: larger;
+}
+.regi-right .user-input{
+    width: 70% !important;
+    color: #463C74 !important;
+    margin-left: auto;
+    margin-right: auto;
+    /* background-color: #fcfcfc !important;
+    border: 1px solid #463C74 !important;
+    border-radius: 5px; */
+    
+}
+
+.regi-right .user-input-border{
+    width: 70% !important;
+    color: #463C74 !important;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fcfcfc !important;
+    border: 1px solid #463C74 !important;
+    border-radius: 5px;
+}
+
+.user-input-border input{
+    width: 97%;
+    padding-left: 3%;
+    background: transparent;
+    height: 100%;
+    border: none;
+    margin: 0px;
+}
+
+.user-name{
+    background-color: #fcfcfc !important;
+    border: 1px solid #463C74 !important;
+    border-radius: 5px;
+}
+
+.alert-warning{
+    width: 70% !important;
+}
+
+.regi-right form .next{
+    display: block;
+    color: #fcfcfc;
+    font-weight: bold;
+    border-radius: 50%;
+    margin-top: 1%;
+    float: right;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+}
+
+.next img{
+    margin: 0px;
+    height: 35px;
+    width: 35px;
+    padding: 0px;
+}
+
+.regi-right form .submit{
+    height: 40px;
+    width: 70%;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'PT Sans','Roboto','Consolas','sans-sarif';
+}
+
+.register-btn {
+    height: 80%;
+    margin-top: 1%;
+    width: 40%;
+    background-color: #463C74;
+    color: #fcfcfc;
+    font-weight: bold;
+    font-size: large;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    float: right;
+}
+
+.prev{
+    float: left;
+    color: #fcfcfc;
+    font-weight: bold;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+
+.regi-form input:focus,input:active{
+    box-shadow: none !important;
+}
+
+.prev img{
+    margin: 0px;
+    height: 35px;
+    width: 35px;
+    padding: 0px;
+}
+
+.visible{
+    display: none;
+}
+
+

@@ -1,0 +1,136 @@
+{%extends 'main/header.html'%}
+{%load static%}
+{%block user_body%}
+<!-- load search static File -->
+<link rel="stylesheet" href="{%static 'main/search.css'%}">
+
+<!-- if statement for search results  -->
+<main class="main-container">
+    {% if searchDictionary %}
+        <!-- Filter Class -->
+        <div class="filter">
+            <div class="filter-btn">
+                <!-- filter button class -->
+                <div id="filterBtn">
+                    <!-- Filter button Image -->
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="../../static/main/images/search/filter.svg" width="20px" height="20px" alt="">
+                            Filter
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <ul class="dropdown-menu sub-menu" id="age-link">
+                                {% for ages in searchDictionary %}
+                                    <label id="ages-label" type="button" class="dropdown-item" for="ID{{ages.age}}">
+                                            <input type="checkbox" id="ID{{ages.age}}" name="age-group" data-filter="ages" class="ages sub-menu-check" value ="{{ages.age}}">  
+                                            {{ages.age}}
+                                    </label>
+                                {%endfor%}
+                            </ul>
+                            <a class="dropdown-item" id="drop-down-age" type="button">Age</a>
+
+
+                            <ul class="dropdown-menu sub-menu" id="prof-link">
+                                {% for prof in searchDictionary %}
+                                    <label id="prof-label" type="button" class="dropdown-item" for="ID{{prof.profession}}"> 
+                                            <input type="checkbox" name="age-group" data-filter="prof" class="prof sub-menu-check" id="ID{{prof.profession}}" value ="{{prof.profession}}">  
+                                            {{prof.profession}}
+                                    </label>
+                                {%endfor%}
+                            </ul>
+                            <a class="dropdown-item" id="drop-down-prof" type="button">Profession</a>
+            
+
+                            <ul class="dropdown-menu sub-menu" id="city-link">
+                                {% for city in searchDictionary %}
+                                    <label id="city-label" class="dropdown-item" type="button" for="ID{{city.city}}">
+                                            <input type="checkbox" id="ID{{city.city}}" name="age-group" data-filter="city" class="city sub-menu-check" value ="{{city.city}}">  
+                                            {{city.city}}
+                                    </label>
+                                {%endfor%}
+                            </ul>
+                            <a class="dropdown-item" id="drop-down-city" type="button">City</a>
+                        </ul>
+                    </div>
+                </div>    
+            </div>
+        </div>
+        <div class="search">
+            {% for search in searchDictionary %}
+            <div class="search-result d-inline-block">
+                <div class="images-profile">
+                    {% if search.img %}
+                        <img src="{{search.img.url}}" alt="promotional-set">
+                    {% else %}
+                        <img src="../../media/profileImg/default_profile.png" alt="promotional">
+                    {% endif %}
+                </div>
+                <h3>{{search.name}}</h3>
+                <div class="details">
+                    <span>{{ search.age }}</span> |
+                    <span>{{search.religene}}</span> | 
+                    <span>{{ search.profession}}</span> | <br/>
+                    <span>{{ search.city }}, {{ search.state }}</span>
+                </div>
+                <div class=" button-profile d-flex justify-content-evenly">
+                    <form action="{% url 'searchDetail'%}" method="GET">
+                        <button type="submit" name="view" value="{{ search.id }}" class="view">View</button>
+                    </form>
+                    <form action="{% url 'intress' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit"  name="interst" value="{{ search.id }}"  class="interst">Interested</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <h3 class="empty-msg" style="padding-top: 6rem; padding-left: 33rem; display: none; "><center>{{emptyMsg}}</center></h3>
+        <!-- search div -->
+        {%else%}
+        <h3 style="padding-top: 10rem;"><center>{{emptyMsg}}</center></h3>
+    {% endif %}
+    <script src="{%static 'js/search_submenu.js'%}"></script>
+    <script>
+        $(document).ready(function(){
+          $(".sub-menu-check").click(function(){
+              var __filterObj = {};
+              var data_search = '{{search_data_filter}}'
+              var data_search_parse = JSON.parse(data_search)
+              $('.sub-menu-check').each(function(index,ele){
+                  var __filterVal=$(this).val();
+                  var __filterKey=$(this).attr('data-filter');
+                  __filterObj[__filterKey] = Array.from(document.querySelectorAll('input[data-filter='+__filterKey+']:checked')).map(function(el){
+                      return el.value
+                    });
+                });
+                __filterObj['gender'] = data_search_parse.gender_search
+                __filterObj['age_start'] = data_search_parse.age_start_search
+                __filterObj['age_end'] = data_search_parse.age_end_search
+                __filterObj['mother_tounge'] = data_search_parse.mother_toungue_search
+              $.ajax({
+                  url:'/filter-data',
+                  data: __filterObj,
+                  dataType:'json',
+                  beforeSend:function(){
+                      $(".search").text = 'Loading...';
+                    },
+                    success:function(searchData){
+                        if(searchData.searchDictionary){
+                            $(".search").show();
+                            $(".empty-msg").hide();
+                            $(".search").html(searchData.searchDictionary);
+                            console.log('success',searchData);
+                        }
+                        else{
+                            $(".search").hide();
+                            $(".empty-msg").show();
+                            console.log('Sorry',searchData);
+                            $(".empty-msg").html(searchData.emptyMsg);
+                      }
+                  }
+              });
+          });
+        });
+      </script>
+</main>
+{% endblock %}

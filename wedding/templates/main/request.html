@@ -1,0 +1,46 @@
+{%extends 'main/header.html'%}
+{%load static%}
+{%block user_body%}
+<link rel="stylesheet" href="{% static 'main/request.css'%}">
+<main class="main">
+  {% if interest %}
+  <div class="main-container">
+      {% for user in interest %}
+        <div class="card">
+          <div class="img-div">
+            {% if user.img %}
+              <img src="../../media/{{user.img}}" class="card-img-top" alt="Profile image not available">
+            {% else %}
+              <img src="../../media/profileImg/default_profile.png" class="card-img-top" alt="Profile image not available">
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <p class="card-text"><strong>{{user.fname}} {{user.lname}}</strong> shows Intrest in your Profile <br/></p>
+            <div class="interess-btn">
+              <span> Are You Interested? </span>
+              <form action="{% url 'intress' %}" class="form" method="POST">
+                  {% csrf_token %}
+                  <button type="submit"  name="interst" value="{{ user.id }}"  class="btn btn-primary">Interested</button>
+              </form>
+              
+              <form action="{% url 'searchDetail'%}" class="form" method="GET">
+                <input type="hidden" name="relation" id="hidden_data" value="requested">
+                <button type="submit" name="view" value="{{ user.id }}" class="btn btn-primary">View</button>
+              </form>
+              <form class="form" method="POST" action="{% url 'notintrest'%}">
+                {%csrf_token%}
+                <button type="submit" name="notintrest" value="{{ user.id }}" class="btn btn-primary">
+                Not Interested
+              </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {%endfor%}
+    </div>
+    {%else%}
+    <h3 style="padding-top: 10rem; "><center>{{msg}}</center></h3>
+  {%endif%}
+</main>
+
+{% endblock %}

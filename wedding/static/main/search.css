@@ -1,0 +1,131 @@
+/* Filter */
+.filter{
+    margin-top: 20px;
+    width: 100%;
+    height: 40px;
+}
+.filter-btn {
+    margin-left: auto;
+    margin-right: 70px;
+    border-radius: 10px;
+    border-radius: 2px;
+    font-size: 18px;
+    width: 106px;
+    height: 40px;
+}
+
+.sub-menu{
+    margin-left: -10rem;
+}
+
+form {
+    width: 40%;
+}
+
+.search{
+    width: 79%;
+    color: #632021;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;  
+}
+
+.main-container{
+    width: 100%;
+    min-height: 20rem;
+}
+.search-result{
+    height: 350px;
+    width: 275px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+    border-radius: 10px;
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-top: 50px;
+}
+
+.images-profile{
+    height: 125px;
+    width: 125px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+}
+
+.search-result img{
+    height: 125px;
+    width: 125px;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: top;
+}
+
+.search-result h3{
+    color: rgba(231, 29, 53, 0.8);
+    font-size: 22px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.search-result  .details{
+    text-align: center;
+    width: 100%;
+    margin-top: 10%;
+}
+
+.search .images{
+    height: 350px;
+    width: 25%;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.search .images{
+    margin-top: -350px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.images h1{
+    margin-top: 280px;
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #fcfcfc;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+/* View and Registration Buttton Code */
+
+.search-result .button-profile {
+    width: 100%;
+    height: 35px;
+    margin-top: 10%;
+}
+
+.button-profile button{
+width: 100%;
+height: 100%;
+background-color: #E03D51;
+color: #fcfcfc;
+font-weight: medium;
+text-align: center;
+border-radius: 10px;
+border-width: 0px;
+font-size: medium;
+}
+
+.view{
+    margin-left: 5%;
+    text-transform: capitalize;
+}
+.interst{
+    margin-right: 5%;
+    text-transform: capitalize;
+}
+
+footer{
+    margin-top: 50px;
+}

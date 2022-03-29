@@ -1,0 +1,127 @@
+body{
+    color: #FD2740;
+}
+.main-container{
+    margin: 0px !important;
+    padding: 0px !important;
+    width: 100%;
+    min-height: 300px;
+}
+
+.img-container{
+    height: 15rem;
+    background-image: url('../../static/main/images/profile/profile-background.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+
+}
+
+figure img{
+    border-radius: 5rem;
+    background: #E87683;
+    padding: 5px;
+    margin-top: 10rem;
+    margin-left: 5rem;
+    height: 10rem;
+    width: 10rem;
+    object-fit: cover;
+}
+
+.profile-img{
+    margin-top: -8rem;
+    margin-left: 10rem;
+    display: inline;
+}
+.profile-container{
+    width: 85%;
+    margin-left: 5rem;
+    margin-right: auto;
+    margin-top: 1rem;
+}
+
+
+.profile-container .name{
+    margin-top: 6rem;
+    font-size: 32px;
+    font-weight: bolder;
+    color:#FD2740;
+}
+
+.about-info{
+    height: 150px;
+}
+
+
+.about-title{
+    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: 700;
+    height: 50px;
+}
+.about-text{
+    height: 100px;
+    width: 100%;
+    float: right;
+    overflow-y: scroll;
+    text-align: justify;
+    border: 2 px solid gray;
+    background-color: transparent;
+    display: block;
+}
+.about-text::-webkit-scrollbar{
+    display: none;
+}
+ 
+.change{
+    margin-bottom: 1rem;
+    cursor: pointer;
+    color: #E03D51 !important;
+    border-color: #E03D51 !important;
+    box-shadow: none !important;
+}
+.change:active{
+    background-color: #E03D51 !important;
+    border-color: #E03D51 !important;
+    color: #fcfcfc !important;
+}
+.change:hover{
+    background-color: #e03d50a8;
+    border-color: #e03d50a8;
+    color: #fcfcfc !important;
+}
+.active-btn{
+    box-shadow: none !important;
+    background-color: #E03D51 !important;
+    border-color: #E03D51;
+    color: #fcfcfc !important;
+    border-color: #E03D51 !important;
+
+}
+
+.form-control{
+    background-color: transparent !important;
+}
+
+.form-title{
+    margin-top: 2px;
+}
+
+.submitBtn{
+    background-color:#E03D51 !important;
+    border-color: #E03D51 !important;
+}
+.submitBtn:focus{
+    box-shadow: none !important;
+}
+.submitBtn:active{
+    box-shadow: none !important;
+    background-color:#e03d50dc !important;
+}
+
+.form-control:active,.form-control:focus{
+    box-shadow: none !important;
+    border-color: #E87683 !important;
+}

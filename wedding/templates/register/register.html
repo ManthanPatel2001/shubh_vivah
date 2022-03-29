@@ -1,0 +1,116 @@
+{% extends "register/header.html" %}
+{%load static%}
+
+{% block user_body %}
+<link rel="stylesheet" href='{% static "register/register.css" %}'>
+<!-- regi Division starts here  -->
+<div class="container-lg container-md container-sm regi-container">
+    <div class="row">
+        <div class="col">
+            <img class="regi-img" src="{%static 'register/images/login.jpg'%}" alt="">
+        </div>
+        <div class="col regi-right">
+            <h1 class='mx-auto fs-1 my-2'>Registration</h1>
+            <div class="regi-form">
+                <form action="{% url 'login'%}" id="form-regi" method="POST"> 
+                    {% csrf_token %}
+                    <div id="first-form">
+                        <div class="user-input input-group flex-nowrap mt-3 mb-3 my-auto">
+                            <input class="form-control my-auto user-name me-1 " type="text" placeholder="First Name" name="fname" id="fname" required>
+                            <input class="form-control my-auto user-name ms-1" id="lname" type="text" placeholder="Last Name" name="lname" required>
+                        </div>
+                        <div class="alert alert-warning pe-0 mx-auto h-25 px-auto py-0 d-none" role="alert" id="alertBox-name"></div>
+                        
+                        
+                        <div class="user-input-border input-group flex-nowrap mt-3 mb-3 my-auto">
+                            <input class="form-control my-auto user-full" id="user_email" type="email" placeholder="Email" name="email" required>
+                        </div>
+                        <div class="alert alert-warning pe-0 mx-auto h-25 px-auto py-0 d-none" role="alert" id="alertBox-email"></div>
+                        
+                        
+                        <div class="user-input-border input-group flex-nowrap mt-3 mb-3 my-auto">
+                            <input class="form-control my-auto user-full" type="password" name="pass" id="pass" placeholder="Password" required>
+                            <button type="button" class="input-group-text" id="showPass">Show</button>
+                        </div>
+                        <div class="user-input-border input-group flex-nowrap mt-3 mb-3 my-auto">
+                                <input class="form-control my-auto user-full" type="password" name="conf-pass" id="confPass" placeholder="Conform Password" required>
+                            </div>
+                            <div class="alert alert-warning pe-0 mx-auto h-25 px-auto py-0 d-none" role="alert" id="alertBox-pass">
+                            </div>
+                            
+                            <div class="user-input input-group flex-nowrap mt-3 mb-3 my-auto">
+                                <select class="form-control my-auto w-50 user-name me-1 input-look form-select" name="state" id="state" placeholder="State" required>
+                                    <option value="" disabled selected>State</option>
+                                    <option value="Gujarat" >Gujarat</option>
+                                    <option value="Assam" >Assam</option>
+                                    <option value="Bihar" >Bihar</option>
+                                </select>
+                                
+                                <select class="form-control my-auto w-50 user-name ms-1 input-look form-select" type="text" name="city" id="city" placeholder="City" required>
+                                <option value="" disabled selected>City</option>
+                            </select>
+                        </div>
+                        <div class="alert alert-warning pe-0 mx-auto h-25 px-auto py-0 d-none" role="alert" id="alertBox-state"></div>
+                        
+                        <div class="user-input-border input-group flex-nowrap mt-3 mb-2 my-auto">
+                            <input class="form-control my-auto user-full" type="tel" name="mobile" id="mobile" placeholder="Mobile No" pattern="[0-9]+" minlength="10" maxlength="10" oninput="mobile_check()" title="Please Enter 10 number only" required>
+                        </div>
+                        <div class="alert alert-warning pe-0 mx-auto h-25 px-auto py-0 d-none" role="alert" id="alertBox-mobile">
+                        </div>
+                        
+                        <div class="submit" >
+                            <button type="button" class="next"><img src="{% static 'register/images/next.png' %}" alt="" id="next">
+                            </button>
+                        </div>
+                    </div>
+                    <div id="sec-form" class="visible">
+                        <div class="user-input input-group flex-nowrap mt-3 mb-3 my-auto">
+                            <select name="gender" id="look" class="form-control my-auto w-50 user-name me-1 input-look form-select" required>
+                                <option value="" selected disabled>Gender</option>
+                                <option value="Male">Man</option>
+                                <option value="Female">Woman</option>
+                            </select>
+                            <input class="form-control my-auto w-100 user-name ms-1" onfocus="(this.type='date')" type="text" onchange="date_validate()"  placeholder="Date of Birth" name="birthDate" id="birth_date"  required>
+                        </div>
+                        <div class="alert alert-warning pe-0 mx-auto h-25 px-auto py-0 d-none" role="alert" id="alertBox-look"></div>
+                        
+                        <div class="user-input-border input-group flex-nowrap mt-3 mb-3 my-auto">
+                            <select class="form-control form-select my-auto user-full" placeholder="Qualification" id="qualify" name="qualification" required>
+                                <option value="" selected disabled>Qualification</option>
+                                <option value="10th Pass">10th Pass</option>
+                                <option value="12th Pass">12th Pass</option>
+                                <option value="B.E">B.E</option>
+                                <option value="Master">Master</option>
+                                <option value="Phd">Phd</option>
+                            </select>
+                        </div>
+                        <div class="alert alert-warning pe-0 mx-auto h-25 px-auto py-0 d-none" role="alert" id="alertBox-qualify"></div>
+                        <div class="user-input-border input-group flex-nowrap mt-3 mb-3 my-auto">
+                            <input class="form-control my-auto user-full" type="text" placeholder="Profession" id="prof" name="profession"  required>
+                        </div>
+                        <div class="alert alert-warning pe-0 mx-auto h-25 px-auto py-0 d-none" role="alert" id="alertBox-prof"></div>
+                        <div class="user-input-border input-group flex-nowrap mt-3 mb-3 my-auto">
+                            <input class="form-control my-auto user-full" type="text" name="mothertoung" id="mothertoung" placeholder="Mother Tounge"required>
+                        </div>
+                        <div class="alert alert-warning pe-0 mx-auto h-25 px-auto py-0 d-none" role="alert" id="alertBox-mothertoung"></div>
+                        <div class="user-input input-group flex-nowrap mt-3 mb-3 my-auto">
+                            <input class="form-control my-auto user-name me-1" type="text" placeholder="Cast" id="cast" name="cast" required>
+                            <input class="form-control my-auto user-name ms-1" type="text" placeholder="Religene" id="religene" name="religene" required>
+                        </div>
+                        <div class="alert alert-warning pe-0 mx-auto h-25 px-auto py-0 d-none" role="alert" id="alertBox-religene"></div>
+                        <div class="submit" >
+                            <button type="button" class="prev"><img src="{%static 'register/images/prev.png'%}" alt="" id="prev">
+                                <button type="submit" id="submit" class="register-btn">Register
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{%static 'js/registerValidation.js'%}"></script>
+<!-- regi division end here  -->
+
+
+{%endblock%}

@@ -1,0 +1,42 @@
+{% extends "register/header.html" %}
+{% load static %}
+{% block user_body %}
+<link rel="stylesheet" href='{% static "register/login.css" %}'>
+    <!-- Login Division starts here  -->
+    <div class="container-lg container-md container-sm login-container ">
+        <div class="row">
+            <div class="col">
+                <img class="login-img" src='{% static "register/images/login.jpg" %}' alt="login">
+            </div>
+            <div class="col login-right">
+                <h1 class='mx-auto fs-1 my-2'>Login</h1>
+                <div class='login-form'>
+                    <form action="{% url 'login'%}" method="GET"> 
+                        <div class="user-input input-group flex-nowrap mt-3 mb-3 my-auto">
+                            <span class="input-group-text" id="addon-wrapping">
+                                <img src='{% static "register/images/email.png" %}' alt="user email" width="20px" height="20px">
+                            </span>
+                            <input type="email" class="form-control my-auto" placeholder="Enter Email" aria-label="email" aria-describedby="addon-wrapping" name="email" id="email">
+                        </div>
+                        <div class="user-input input-group flex-nowrap mb-3 my-auto">
+                            <span class="input-group-text" id="addon-wrapping">
+                                <img src='{% static "register/images/pass.png" %}' width="20px" height="20px" alt="user pass">
+                            </span>
+                            <input type="password" class="form-control my-auto" placeholder="Enter Password" aria-label="password" aria-describedby="addon-wrapping" name="password" id="password">
+                        </div>
+                        <button type="submit">Welcome</button>
+                    </form>
+                    {%if errorMsg %}
+                        <div class="alert alert-warning pe-0 mt-3 mx-auto h-25 px-auto py-0" role="alert" id="alertBox-login">
+                            {{errorMsg}}
+                        </div>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- login division end here  -->
+{% endblock %}
+
+    
+

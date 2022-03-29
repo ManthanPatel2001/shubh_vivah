@@ -1,0 +1,161 @@
+{%extends 'main/header.html'%}
+{%load static%}
+{%block user_body%}
+<link rel="stylesheet" href="{%static 'main/detail.css'%}">
+<main class="main-container">
+    {% if searchDetail %}
+    <div class="profle-detail container-fluid">
+        <div class="container .img-cont">
+            {% if searchDetail.img %}
+            <img src="{{ searchDetail.img.url }}" class="profile-img" alt="Profile Image">
+            {%else%}
+            <img class="profile-img" src="../../media/profileImg/default_profile.png" alt="Profile Image">
+            {% endif %}
+        </div>
+        <div class="header-detail">
+            <h1 class="d-block">{{searchDetail.name}}</h1>
+            <div class="right-detail d-flex">
+                <div class="left-info  container-lg w-50">
+                    <div class="heading">
+                        <span>Age:</span>
+                        <span>Mother Tounge:</span>
+                        <span>Profession:</span>
+                        <span>Living In:</span>
+                    </div>
+                    <div class="detail">
+                        <span>{{searchDetail.age}} Years</span>
+                        <span>{{searchDetail.mother_tounge}}</span>
+                        <span>{{searchDetail.profession}}</span>
+                        <span>{{searchDetail.city}}, {{searchDetail.state}}</span>
+                    </div>
+                </div>
+                <div class="right-info container-lg me-1 w-50">
+                    <div class="heading">
+                        <span>Religene:</span>
+                        <span>Height:</span>
+                        <span>Education:</span>
+                    </div>
+                    <div class="detail">
+                        <span>{{searchDetail.Religene}}</span>
+                        {%if searchDetail.heightInFeet and searchDetail.heightInInch %}
+                        <span>{{searchDetail.heightInFeet}}'{{searchDetail.heightInInch}}</span>
+                        {%else%}
+                        <span>Not provided</span>
+                        {%endif%}
+                        <span>{{searchDetail.qualification}}</span>
+                    </div>
+                </div>
+            </div>
+            {% if button_show != 'matched' %}
+                {% if button_show == 'requested' %}
+                    <form method="POST" action="{% url 'intress' %}" >
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success mt-4 me-5 m-0 intrested" name="interst" value="{{ searchDetail.id }}" >Interested</button>
+                    </form>
+                    <form method="POST" action="{% url 'notintrest'%}">
+                        {%csrf_token%}
+                        <button type="submit" name="notintrest" class="btn btn-success mt-4 me-auto m-0 intrested" value="{{ searchDetail.id }}" >
+                        Not Interested
+                    </button>
+                    </form>
+                {% elif button_show != 'interested'%}
+                    <form method="POST" action="{% url 'intress' %}" >
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success mt-4 me-5 m-0 intrested" name="interst" value="{{ searchDetail.id }}" >Interested</button>
+                    </form>
+                {% else %}
+                    <form method="POST" action="{% url 'notintrest'%}">
+                        {%csrf_token%}
+                        <button type="submit" name="notintrest" class="btn btn-success mt-4 me-auto m-0 intrested" value="{{ searchDetail.id }}" >
+                        Not Interested
+                    </button>
+                    </form>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="about">
+        <span class="about-title">About:</span>
+        {% if searchDetail.about %}
+        <span class="about-detail">{{searchDetail.about}} </span>
+        {% else %}
+        <span class="about-detail">Not provided </span>
+        {% endif %}
+    </div>
+    <div class="info basic">
+        <h3>Basic Information</h3>
+        <div class="heading">
+            <span>Date of Birth:</span>
+            <span>Height:</span>
+            <span>Gender:</span>
+            <span>Cast:</span>
+            <span>Religene:</span>
+            <span>Mother Tounge:</span>
+            <span>Sunshine:</span>
+        </div>
+        <div class="detail">
+            <span>{{searchDetail.birthdate|date:" d M, Y"}}</span>
+            {%if searchDetail.heightInFeet and searchDetail.heightInInch %}
+            <span>{{searchDetail.heightInFeet}}'{{searchDetail.heightInInch}}</span>
+            {%else%}
+            <span>Not provided</span>
+            {%endif%}
+            <span>{{searchDetail.gender}}</span>
+            <span>{{searchDetail.cast}}</span>
+            <span>{{searchDetail.Religene}}</span>
+            <span>{{searchDetail.mother_tounge}}</span>
+            {%if searchDetail.Sunshine%}
+            <span>{{searchDetail.Sunshine}}</span>
+            {%else%}
+            <span>Not provided</span>
+            {%endif%}
+            
+        </div>
+    </div>
+    <div class="info edu">
+        <h3>Qualification & Career</h3>
+        <div class="heading">
+            <span>Profession:</span>
+            <span>Education:</span>
+            <span>Annual Income:</span>
+        </div>
+        <div class="detail">
+            <span>{{searchDetail.profession}}</span>
+            <span>{{searchDetail.qualification}}</span>
+            {%if searchDetail.income %}
+            <span>{{searchDetail.income}}</span>
+            {%else%}
+            <span>Not provided</span>
+            {%endif%}
+            
+        </div>
+    </div>
+    <div class="info add">
+        <h3>Address</h3>
+        <div class="heading">
+            <span>Live in:</span>
+        </div>
+        <div class="detail">
+            <span>{{searchDetail.city}}, {{searchDetail.state}}</span>
+        </div>
+    </div>
+
+    {% if button_show == 'matched' %}
+    <div class="info contact">
+        <h3>Contact Info</h3>
+        <div class="heading">
+            <span>Phone Number:</span>
+        </div>
+        <div class="detail">
+            <span>+91 {{searchDetail.phone}}</span>
+        </div>
+    </div>
+    {%endif%}
+
+
+    {%else%}
+        <h3 style="padding-top: 10rem; "><center>{{emptyMsg}}</center></h3>
+    {% endif %}
+    </div>
+</main>
+{%endblock%}

@@ -1,0 +1,245 @@
+{%extends 'main/header.html'%}
+{%load static%}
+{%block user_body%}
+<link rel="stylesheet" href="{%static 'main/profile.css'%}">
+
+<main class="main-container">
+    {% if id %}
+    <form method='post' enctype="multipart/form-data" id="update_form" name="profile" action="{%url 'updateProfile' %}">
+        {% csrf_token %}
+            <!-- profile Image Strat -->
+            <div class=" img-container w-100">
+                <figure>
+                    {% if img %}
+                        <img src="{{ img.url }}" alt="">
+                    {% else %}
+                        <img src="../../media/profileImg/default_profile.png" alt="">
+                    {% endif %}
+                </figure>
+            </div>
+            <!-- Profile Image End -->
+            <!-- profile detail Start -->
+            <div class="profile-container">
+                <div class="name">
+                    <h2>{{fname}} {{lname}}</h2>
+                </div>
+                <div class="form-info-container w-75 mx-auto">
+                    
+                <!-- about info -->
+                <div class="about-info ">
+                    <div class="about-title">
+                        <h5 class="card-title mt-2">About</h5>
+                        <button type="button" id="change" class="btn btn-sm btn-outline-info change">Change</button>    
+                    </div>
+                    <textarea class="form-control about-text" id="about" name="about" disabled placeholder="Write Here For About">{{about}}</textarea>
+                </div>
+                <!-- about info -->
+
+                
+                <!-- profile info  -->
+                    
+                    <div class="name-input d-flex">
+                        <div class="input-group flex-nowrap mt-4 w-50 me-2">
+                            <input type="text" class="form-control" id="fname" placeholder="First Name" value="{{fname}}" name="fname" aria-describedby="addon-wrapping"disabled required>
+                        </div>
+                        <div class="input-group flex-nowrap mt-4 w-50 ms-2">
+                            <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" value="{{lname}}"  aria-describedby="addon-wrapping"disabled  required>
+                        </div>
+                    </div>
+
+                    <div class="address d-flex">
+                        <div class="input-group flex-nowrap mt-4 w-50 me-2">
+                            <!-- <input type="text" class="form-control" id="city" placeholder="City" value="{{city}}" name="city" aria-describedby="addon-wrapping" disabled  required> -->
+                            <select class="form-control form-select" id="state" placeholder="State" value="{{state}}" name="state" aria-describedby="addon-wrapping" disabled required>
+                                <option value="" disabled selected>State</option>
+                                <option value="Gujarat" {% if state == 'Gujarat'%} selected {%endif%} >Gujarat</option>
+                                <option value="Assam" {% if state == 'Assam'%} selected {%endif%} >Assam</option>
+                                <option value="Bihar" {% if state == 'Bihar'%} selected {%endif%} >Bihar</option>
+                            </select>
+                        </div>
+                        <div class="input-group flex-nowrap mt-4 w-50 ms-2">
+                            <!-- <input type="text" class="form-control" id="state" placeholder="State" value="{{state}}" name="state" aria-describedby="addon-wrapping" disabled  required> -->
+                            <select class="form-control form-select" type="text" name="city" id="city" placeholder="City" id="city" placeholder="City" value="{{city}}" name="city" aria-describedby="addon-wrapping" disabled required>
+                                <option value="" disabled selected>City</option>
+                            </select>
+                        </div>
+
+                        
+                        
+                        
+                    </div>
+
+                    <div class="input-group flex-nowrap mt-4">
+                        <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="Mobile No" value="{{mobile}}" title="Please Enter Valid Mobile Number"  pattern='[0-9]+' maxlength="10" aria-describedby="addon-wrapping" disabled  required>
+                    </div>
+
+                    <div class="male-birthdate d-flex">
+                        <div class="input-group flex-nowrap mt-4 w-50 me-2">
+                            <select class="form-control form-select" id="gender" aria-label="Floating label select example" name="gender" disabled  required>
+                                <option selected disabled>Gender</option>
+                                <option value="Male"
+                                {% if gender == 'Male'%}selected{% endif %}
+                                >Male</option>
+                                <option value="Female"
+                                {% if gender == 'Female'%}selected{% endif %}
+                                >Female</option>
+                            </select>
+                        </div>
+                        <div class="input-group flex-nowrap mt-4 w-50 ms-2">
+                            <input type="date" class="form-control" id="birthdate" name="birthdate" value="{{birthdate|date:'Y-m-d'}}"  aria-describedby="addon-wrapping" disabled  required>
+                        </div>
+                    </div>
+
+                    <div class="input-group flex-nowrap mt-4">
+                        <select class="form-control form-select my-auto user-full" id="qualification" name="qualification" placeholder="Professsion" aria-describedby="addon-wrapping" disabled required>
+                            <option value="" selected disabled>Qualification</option>
+                            <option value="10th Pass" {% if qualification == '10th Pass'%} selected {%endif%}>10th Pass</option>
+                            <option value="12th Pass" {% if qualification == '12th Pass'%} selected {%endif%}>12th Pass</option>
+                            <option value="B.E" {% if qualification == 'B.E'%} selected {%endif%}>B.E</option>
+                            <option value="Master" {% if qualification == 'Master'%} selected {%endif%}>Master</option>
+                            <option value="Phd" {% if qualification == 'Phd'%} selected {%endif%}>Phd</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group flex-nowrap mt-4">
+                        <input type="text" class="form-control" id="mothertoung" name="mothertoung" placeholder="Mother Tounge" value="{{mother_tounge}}"  aria-describedby="addon-wrapping" disabled required>
+                    </div>
+
+                    <div class="cast-religene d-flex">
+                        <div class="input-group flex-nowrap mt-4 w-50 me-2">
+                            <input type="text" class="form-control" id="cast" name="cast" placeholder="cast" value="{{cast}}"  aria-describedby="addon-wrapping" disabled  required>
+                        </div>
+                        <div class="input-group flex-nowrap mt-4 w-50 ms-2 ">
+                            <input type="text" class="form-control" id="religene" placeholder="religene" name="religene" value="{{Religene}}"  aria-describedby="addon-wrapping" disabled  required>
+                        </div>
+                    </div> 
+
+                    <div class="input-group flex-nowrap mt-4">
+                        <input type="text" class="form-control" id="profession" placeholder="Occupation" name="profession" value="{{profession}}"  aria-describedby="addon-wrapping" disabled  required>
+                    </div>
+
+                    <div class="input-group flex-nowrap mt-4">
+                        <input type="text" class="form-control" id="sunshine" placeholder="Sunshine" name="sunshine" value="{{sunshine}}"  aria-describedby="addon-wrapping" disabled >
+                    </div>
+
+                    <div class="height d-flex">
+                        <div class="input-group flex-nowrap mt-4 w-50 me-2">
+                            <input type="text" class="form-control" name="heightInFeet" placeholder="Height ( in Feet )"  value="{{heightInFeet}}" pattern="(?:[None,0-9]+)?" maxlength="2" title="Please Enter Number"   aria-describedby="addon-wrapping" disabled >
+                        </div>
+                        <div class="input-group flex-nowrap mt-4 w-50 ms-2 ">
+                            <input type="text" class="form-control" id="heightInInch" placeholder="Height ( in Inch )" pattern="(?:[None,0-9]+)?" 
+                            title="Please Enter Number" maxlength="3"  name="heightInInch" value="{{heightInInch}}"  aria-describedby="addon-wrapping" disabled >
+                        </div>
+                    </div>
+
+                    <div class="input-group flex-nowrap mt-4">
+                        <input type="text" class="form-control" id="income" placeholder="Income" value="{{income}}" name="income" aria-describedby="addon-wrapping" pattern="(?:[None,0-9]+)?" maxlength="10" title='Please Enter Number Only' disabled>
+                    </div>
+                    
+                    <div class="input-group flex-nowrap mt-4">
+                        <input type="file" accept="image/*"
+                        class="form-control" id="image" name="image" aria-describedby="addon-wrapping" disabled >
+                    </div>
+
+                    <div class="input-group flex-nowrap mt-4">
+                        <button type="submit" id="submitBtn" name="submitBtn" class="btn btn-md ms-auto me-0 btn-primary submitBtn" disabled>Update Profile</button>
+                    </div>
+                    <div class="alert text-center alert-warning pe-0 mt-2 mx-auto h-25 w-50 px-auto py-0 d-none" role="alert" id="alertBox-update"></div>
+                    </div>
+                </div>
+                <!-- profile info  -->
+            </div>
+            <!-- profile detail -->
+    </form>
+    <script>
+        let changeBtn = document.getElementById('change');
+        changeBtn.addEventListener("click",function(){
+            let formInput = document.getElementsByClassName('form-control');
+            if (changeBtn.classList.contains('active-btn')){
+                changeBtn.classList.remove('active-btn');
+                document.getElementById('submitBtn').disabled = true;
+                for(let i = 0; i < formInput.length; i++){
+                    formInput[i].disabled = true;
+                }
+            }else{
+                changeBtn.classList.add('active-btn');
+                document.getElementById('submitBtn').disabled = false;
+                for(let i = 0; i < formInput.length; i++){
+                    formInput[i].disabled = false;
+                }
+            }
+        });
+        document.getElementById('update_form').addEventListener('submit',function(e){
+
+            var image = document.getElementById("image").value;
+            var mobile = document.getElementById("mobile").value;
+            var dot = image.lastIndexOf(".") + 1;
+            var extFile = image.substr(dot, image.length).toLowerCase();
+            if(mobile === ''){
+                e.preventDefault()
+                document.getElementById('alertBox-update').classList.remove('d-none')
+                document.getElementById('alertBox-update').innerHTML = 'Please Enter valid Mobile Number'
+            }else if(mobile.length != 10){
+                e.preventDefault()
+                document.getElementById('alertBox-update').classList.remove('d-none')
+                document.getElementById('alertBox-update').innerHTML = 'Please Enter 10 digit Mobile Number'
+            }else if (image != ''){
+                if (extFile == "jpg" || extFile == "jpeg" || extFile == 'png' || extFile == 'gif'){
+                //accepted
+                }else{
+                        e.preventDefault()
+                        document.getElementById('alertBox-update').classList.remove('d-none')
+                        document.getElementById('alertBox-update').innerHTML = 'Only .png, .jpg, .jpeg, .gif Files are accepted'
+                }
+            }
+        });
+
+        let state = document.getElementById('state');
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth() + 1;
+        let yyyy = today.getFullYear() - 21;
+        let city = document.getElementById('city');
+        let state_val = state.value;
+
+        if (dd < 10) {
+        dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+        mm = '0' + mm;
+        } 
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("birthdate").setAttribute("max", today);
+
+        city.options.length=0;
+        const cityState = {
+            'Gujarat':['Ahmedabad','Surat','Rajkot'],
+            'Assam':['Guwahati', 'Silchar', 'Dibrugarh'],
+            'Bihar':['Patna', 'Gaya', 'Bhagalpur']
+        }
+        for(let i = 0; i < cityState[state_val].length; i++ ){
+            var opt = document.createElement('option');
+            opt.value = cityState[state_val][i];
+            opt.innerHTML = cityState[state_val][i];
+            if( '{{city}}' == cityState[state_val][i]){
+                opt.setAttribute('selected',true)
+            }
+            city.appendChild(opt);
+        }
+        state.addEventListener('change',function(){
+            let city = document.getElementById('city');
+            let state_val = state.value;
+            city.options.length=0;
+            for(let i = 0; i < cityState[state_val].length; i++ ){
+                var opt = document.createElement('option');
+                opt.value = cityState[state_val][i];
+                opt.innerHTML = cityState[state_val][i];
+                city.appendChild(opt);
+            }
+        })
+
+    </script>
+    {% endif %}
+</main>
+{%endblock%}

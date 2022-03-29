@@ -1,0 +1,54 @@
+
+.titlepage {
+    text-align: center;
+    padding-bottom: 60px;
+}
+
+.titlepage h2 {
+    font-size: 60px;
+    color: #3e3e3e;
+    line-height: 77px;
+    font-weight: bold;
+    padding: 0;
+}
+
+.weare {
+    background: #fff;
+    padding-top: 90px;
+}
+
+.weare .titlepage h2 {
+    margin-bottom: 20px;
+}
+
+
+
+.weare .weare_box {
+    text-align: center;
+}
+
+.weare .weare_box figure {
+    margin: 0;
+}
+
+.weare .weare_box figure img {
+    border-radius: 190px;
+    background: #f55171;
+    padding: 15px;
+}
+
+.weare .weare_box p {
+    color: #000;
+    font-size: 17px;
+    line-height: 28px;
+    padding: 35px 0px;
+}
+
+.weare .weare_box .read_more {
+    background: #000;
+    color: #fff;
+}
+
+.weare .weare_box .read_more:hover {
+    background: #f55171;
+}

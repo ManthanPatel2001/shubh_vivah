@@ -1,0 +1,137 @@
+{%extends 'main/header.html'%}
+{%load static%}
+{%block user_body%}
+<!-- Load Main CSS File -->
+<link rel="stylesheet" href="{%static 'main/home.css'%}">
+<!-- Slider container Start -->
+    <div class="container slider mx-0 px-0">
+        <div class="img">
+            <img src="{%static 'main/images/slider-img.jpg'%}" alt="">
+            <div class="search">
+                <!-- Search Form Start -->
+                <form class="form d-flex justify-content-around" id="searchForm" action="{%url 'search'%}" method="get">
+                    <div class="form-input">
+                        <label for="gender">I am Looking for</label>
+                        <select name="gender" id="look" class="input-look form-select" required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="Male">Man</option>
+                            <option value="Female">Woman</option>
+                          </select>
+                    </div>
+                    <div class="form-input">
+                        <label for="age-start">Aged</label>
+                        <select name="age-start" id="age" class="input-age form-select" required>
+                        <option value="" selected disabled>From</option>
+                            <option value="21">21</option>
+                            <option value="26">26</option>
+                            <option value="31">31</option>
+                            <option value="36">36</option>
+                        </select>
+                        <span>TO</span>
+                        <select name="age-end" id="age" class="input-age form-select" required>
+                        <option value="" selected disabled>To</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="35">35</option>
+                            <option value="40">40</option>
+                        </select>
+                    </div>
+                    <div class="form-input">
+                        <label for="mothertounge select-label">Mother Tounge</label>
+                        <select name="mothertounge" class="input-lang form-select" id="motherTounge" required>
+                            <option value="" selected disabled>Select</option>
+                            <option value="Gujarati">Gujarati</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="English">English</option>
+                        </select>
+                    </div>
+                    <div class="form-input">
+                    <button class="btn btn-success" type="submit">Search</button>
+                    </div>
+                </form> 
+                <!-- search form end -->
+            </div>
+        </div>
+    </div>
+    <!-- Slider container End -->
+    
+    <!-- member promotion code start -->
+    <div class="promo">
+        <div class="d-flex justify-content-around">
+            <img src="{%static 'main/images/flower-img.png'%}" alt="promotional">
+            <img src="{%static 'main/images/flower-img.png'%}" alt="promotional">
+            <img src="{%static 'main/images/flower-img.png'%}" alt="promotional">
+        </div>
+        <div class="d-flex justify-content-around">
+            <span>{{counts.match}}+</span>
+            <span>{{counts.member}}+</span>
+            <span>{{counts.cities}}+</span>
+        </div>
+        <div class="d-flex justify-content-around">
+            <h4>Matches</h4>
+            <h4>Members</h4>
+            <h4>Cities</h4>
+        </div>
+    </div>
+    <!-- member promotional code end -->
+
+    <!-- experience with us code start -->
+    <div class="experience">
+        <div class="img-bg"></div>
+        <div class="exp-text">
+            <h2>
+                Matrimony Service with Millions of Success Stories
+            </h2>
+            <h4>Rahul & Riya</h4>
+            <p>Bespoke Matrimony made humble beginnings in year 2019 only to scale massive heights of success in a short span of time and becoming India's leading matrimony service provider. The journey began with a simple thought of making the most of technology to help people find true love. Bespoke is the brain-child of our founders Mr.Devin Gawarvala and Anar Gawarvala who laid down the robust foundation of the No. 1 & most trusted matrimony for millennials,commites to connect.</p>
+        </div>
+        <div class="exp-img">
+            <img src="{%static 'main/images/experience.png'%}" alt="">
+        </div>
+    </div>
+    <!-- experience with us code end -->
+
+    <!-- customer support code start -->
+    <div class='customer-support'>
+        <h1>Why Choose Shubh Vivah Matrimonial</h1>
+        <h3 class="about">Bespoke Matrimony made humble beginnings in year 2019 only to scale massive heights of success in a short span of time and becoming India’s leading matrimony service provider. </h3>
+        <div class="d-flex justify-content-around">
+            <img src="{%static 'main/images/customer/Handshake.png'%}" alt="promotional">
+            <img src="{%static 'main/images/customer/Expert_advice.png'%}" alt="promotional">
+            <img src="{%static 'main/images/customer/PersonalAssitance.png'%}" alt="promotional">
+        </div>
+        <div class="d-flex justify-content-around">
+            <h4>We will Fill Your Profile Details & OfCross-Platform Membership Forms</h4>
+            <h4>Expert Advice By Our Dedicated Matchmakers</h4>
+            <h4>Personal Assistance</h4>
+        </div>
+        <div class="d-flex justify-content-around">
+            <img src="{%static 'main/images/customer/100Verified.png'%}" alt="promotional">
+            <img src="{%static 'main/images/customer/CustomizedMatch.png'%}" alt="promotional">
+            <img src="{%static 'main/images/customer/MessageChat.png'%}" alt="promotional">
+        </div>
+        <div class="d-flex justify-content-around">
+            <h4>100% Verified Profiles With Detailed Background Check</h4>
+            <h4>Customized Match-making Facility</h4>
+            <h4>Message And Chat With Unlimited Users</h4>
+        </div>
+    </div>
+    <!-- customer support code end -->
+
+    <!-- stories code start -->
+    <div class="stories">
+        <h1>Top Stories</h1>
+        <div class="d-flex justify-content-between">
+            <img src="{%static 'main/images/stories/home-stories.jpg'%}" alt="promotional">
+            <img src="{%static 'main/images/stories/home-stories-2.jpg'%}" alt="promotional">
+            <img src="{%static 'main/images/stories/home-stories-3.jpeg'%}" alt="promotional">
+        </div>
+        <div class="d-flex justify-content-between">
+            <div class="images" ><h1>Joe & Samanta<br/>2019</h1></div>
+            <div class="images" ><h1>Avik & Rhea <br/> 2016</h1></div>
+            <div class="images" ><h1>Smit & Natasha<br/> 2020</h1></div>
+        </div>
+    </div>
+    <!-- stories code end -->
+    <!-- java script for form clear -->
+{%endblock%}

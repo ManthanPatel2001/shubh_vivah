@@ -1,0 +1,27 @@
+{% for search in searchDictionary %}
+    <div class="search-result d-inline-block">
+        <div class="images-profile">
+            {% if search.img %}
+                <img src="../../media/{{search.img}}" alt="promotional-set">
+            {% else %}
+                <img src="../../media/profileImg/default_profile.png" alt="promotional">
+            {% endif %}
+        </div>
+        <h3>{{search.name}}</h3>
+        <div class="details">
+            <span>{{ search.age }}</span> |
+            <span>{{search.religene}}</span> | 
+            <span>{{ search.profession}}</span> | <br/>
+            <span>{{ search.city }}, {{ search.state }}</span>
+        </div>
+        <div class=" button-profile d-flex justify-content-evenly">
+            <form action="{% url 'searchDetail'%}" method="GET">
+                <button type="submit" name="view" value="{{ search.id }}" class="view">View</button>
+            </form>
+            <form action="{% url 'intress' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit"  name="interst" value="{{ search.id }}"  class="interst">Interested</button>
+            </form>
+        </div>
+    </div>
+{% endfor %}
